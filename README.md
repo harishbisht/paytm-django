@@ -30,9 +30,9 @@ PAYTM_CALLBACK_URL = "http://localhost:8000/response/"
 ```
 
 * Migrate paytm app for transactions details
-
-Python manage.py migrate paytm
-
+```
+python manage.py migrate paytm
+```
 
 * Now in terminal run the server and go to http://localhost:8000/
 ```
