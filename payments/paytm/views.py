@@ -38,7 +38,7 @@ def payment(request):
                 }
         param_dict = data_dict
         param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
-        return render(request,"paytm/payment.html",{'paytmdict':param_dict})
+        return render(request,"payment.html",{'paytmdict':param_dict})
     return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
 
 @login_required
@@ -52,7 +52,7 @@ def response(request):
         verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
         if verify:
             PaytmHistory.objects.create(user=request.user, **data_dict)
-            return render(request,"paytm/response.html",{"paytm":data_dict})
+            return render(request,"response.html",{"paytm":data_dict})
         else:
             return HttpResponse("checksum verify failed")
     return HttpResponse(status=200)
