@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'paytm',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -103,4 +105,5 @@ STATIC_URL = '/static/'
 
 PAYTM_MERCHANT_KEY = ""
 PAYTM_MERCHANT_ID = ""
-PAYTM_CALLBACK_URL = "http://localhost:8000/response/"
+HOST_URL = "http://192.168.5.36:8080"
+PAYTM_CALLBACK_URL = "/paytm/response/"
