@@ -32,7 +32,7 @@ def payment(request):
                     'TXN_AMOUNT': bill_amount,
                     'CUST_ID':'harish@pickrr.com',
                     'INDUSTRY_TYPE_ID':'Retail',
-                    'WEBSITE':'WEB_STAGING',
+                    'WEBSITE': settings.PAYTM_WEBSITE,
                     'CHANNEL_ID':'WEB',
                     'CALLBACK_URL':CALLBACK_URL,
                 }
