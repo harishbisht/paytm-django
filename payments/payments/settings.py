@@ -105,13 +105,13 @@ STATIC_URL = '/static/'
 
 PAYTM_MERCHANT_KEY = ""
 PAYTM_MERCHANT_ID = ""
-HOST_URL = "http://192.168.5.36:8080"
+HOST_URL = "http://localhost:8080"
 PAYTM_CALLBACK_URL = "/paytm/response/"
 
 if DEBUG:
     PAYTM_MERCHANT_KEY = "bKMfNxPPf_QdZppa"
     PAYTM_MERCHANT_ID = "DIY12386817555501617"
-    PAYTM_WEBSITE = 'DIYtestingweb'
+    PAYTM_WEBSITE = 'WEB_STAGING'
     HOST_URL = 'http://localhost:8000'
     '''
     In sandbox enviornment you can use following wallet credentials to login and make payment.

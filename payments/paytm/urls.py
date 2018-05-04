@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 
+
 urlpatterns = [
     # Examples:
     url(r'^$', 'paytm.views.home', name='home'),

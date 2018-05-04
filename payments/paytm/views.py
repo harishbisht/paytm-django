@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-import Checksum
+from . import Checksum
 
 
 from paytm.models import PaytmHistory
@@ -15,7 +15,7 @@ from paytm.models import PaytmHistory
 def home(request):
     return HttpResponse("<html><a href='"+ settings.HOST_URL +"/paytm/payment'>PayNow</html>")
 
-@login_required
+
 def payment(request):
     MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
     MERCHANT_ID = settings.PAYTM_MERCHANT_ID
@@ -24,7 +24,7 @@ def payment(request):
     # Generating unique temporary ids
     order_id = Checksum.__id_generator__()
 
-    bill_amount = request.GET.get("bill_amount")
+    bill_amount = 100
     if bill_amount:
         data_dict = {
                     'MID':MERCHANT_ID,
@@ -34,14 +34,14 @@ def payment(request):
                     'INDUSTRY_TYPE_ID':'Retail',
                     'WEBSITE': settings.PAYTM_WEBSITE,
                     'CHANNEL_ID':'WEB',
-                    'CALLBACK_URL':CALLBACK_URL,
+                    #'CALLBACK_URL':CALLBACK_URL,
                 }
         param_dict = data_dict
         param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
         return render(request,"payment.html",{'paytmdict':param_dict})
     return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
 
-@login_required
+
 @csrf_exempt
 def response(request):
     if request.method == "POST":
