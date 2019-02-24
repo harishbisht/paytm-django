@@ -12,10 +12,12 @@ virtualenv paytm
 ```
 * Now activate the virtual environment
 ```javascript
-source paytm/bin/activate (Linux/ MacOS)
+(Linux/ MacOS)
+source paytm/bin/activate
 
+(Windows)
 cd
-paytm\Scripts\activate (Windows)
+paytm\Scripts\activate
 ```
 * Now enter into the project folder
 ```javascript
