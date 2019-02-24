@@ -4,7 +4,7 @@ Paytm-Payment Gateway Example On Python-Django
 * First clone the project, open your terminal and enter the command
 
 ```javascript
-git clone https://github.com/harishbisht/paytm-django.git
+git clone https://github.com/itsnikhil/paytm-django.git
 ```
 * Now create a virtual environment
 ```javascript
@@ -18,7 +18,7 @@ source paytm/bin/activate
 ```javascript
 cd paytm-django/payments/
 ```
-* Now install the requirements 
+* Now install the requirements
 ```javascript
 pip install -r requirements.txt
 ```
@@ -26,13 +26,11 @@ pip install -r requirements.txt
 ```
 PAYTM_MERCHANT_KEY=  "<YOUR-PAYTM-MERCHANT-KEY>"
 PAYTM_MERCHANT_ID = "<YOUR-PAYTM-MERCHANT-ID>"
-PAYTM_CALLBACK_URL = "http://localhost:8000/response/"
 ```
 *Staging Credentials
 ```
-PAYTM_MERCHANT_KEY = "bKMfNxPPf_QdZppa"
-PAYTM_MERCHANT_ID = "DIY12386817555501617"
-PAYTM_WEBSITE = 'WEB_STAGING'
+PAYTM_MERCHANT_KEY = "<YOUR-PAYTM-STAGING-MERCHANT-KEY>"
+PAYTM_MERCHANT_ID = "<YOUR-PAYTM-STAGING-MERCHANT-ID>"
 ```
 
 *Make Migrations
@@ -71,5 +69,5 @@ OTP – 489871
 
 ### Stuff used to make this:
 
- * [PAYTM API DOCUMENTATION](http://paywithpaytm.com/developer/paytm_api_doc/) 
- * [SDK DOCUMENTATION](http://paywithpaytm.com/developer/paytm_sdk_doc/) 
+ * [PAYTM API DOCUMENTATION](http://paywithpaytm.com/developer/paytm_api_doc/)
+ * [SDK DOCUMENTATION](http://paywithpaytm.com/developer/paytm_sdk_doc/)
