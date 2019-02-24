@@ -1,4 +1,4 @@
-# Paytm-Python-Django (For python 3)
+﻿# Paytm-Python-Django (For python 3)
 Paytm-Payment Gateway Example On Python-Django
 
 * First clone the project, open your terminal and enter the command
@@ -12,7 +12,10 @@ virtualenv paytm
 ```
 * Now activate the virtual environment
 ```javascript
-source paytm/bin/activate
+source paytm/bin/activate (Linux/ MacOS)
+
+cd
+paytm\Scripts\activate (Windows)
 ```
 * Now enter into the project folder
 ```javascript
