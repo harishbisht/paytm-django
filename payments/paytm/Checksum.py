@@ -19,6 +19,7 @@ def generate_checksum(param_dict, merchant_key, salt=None):
     hash_string = hasher.hexdigest()
 
     hash_string += salt
+    hash_string = bytes(hash_string, 'utf-8')
 
     return __encode__(hash_string, IV, merchant_key)
 
@@ -91,15 +92,15 @@ def __get_param_string__(params):
     return '|'.join(params_string)
 
 
-__pad__ = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
-__unpad__ = lambda s: s[0:-ord(s[-1])]
+__pad__ = lambda s: s + bytes((BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE), 'utf8')
+__unpad__ = lambda s: s[0:-ord(s[-1:])]
 
 
 def __encode__(to_encode, iv, key):
     # Pad
     to_encode = __pad__(to_encode)
     # Encrypt
-    c = AES.new(key, AES.MODE_CBC, iv)
+    c = AES.new(key.encode('utf8'), AES.MODE_CBC, iv.encode('utf8'))
     to_encode = c.encrypt(to_encode)
     # Encode
     to_encode = base64.b64encode(to_encode)
@@ -110,7 +111,7 @@ def __decode__(to_decode, iv, key):
     # Decode
     to_decode = base64.b64decode(to_decode)
     # Decrypt
-    c = AES.new(key, AES.MODE_CBC, iv)
+    c = AES.new(key.encode('utf8'), AES.MODE_CBC, iv.encode('utf8'))
     to_decode = c.decrypt(to_decode)
     if type(to_decode) == bytes:
         # convert bytes array to str.

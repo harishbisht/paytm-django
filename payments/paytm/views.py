@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from . import Checksum
 
@@ -22,7 +25,8 @@ def payment(request):
     settings.USER = user
     MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
     MERCHANT_ID = settings.PAYTM_MERCHANT_ID
-    CALLBACK_URL = settings.HOST_URL + settings.PAYTM_CALLBACK_URL
+    # REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
+    CALLBACK_URL = settings.HOST_URL + settings.PAYTM_CALLBACK_URL + request.user.username + '/'
     # Generating unique temporary ids
     order_id = Checksum.__id_generator__()
 
@@ -43,15 +47,18 @@ def payment(request):
         return render(request, "payment.html", {'paytmdict': param_dict, 'user': user})
     return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
 
-
+# @login_required
 @csrf_exempt
-def response(request):
+def response(request, user_id):
     if request.method == "POST":
         MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
         data_dict = {}
         for key in request.POST:
             data_dict[key] = request.POST[key]
-        verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
+        if data_dict.get('CHECKSUMHASH', False):
+            verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
+        else:
+            verify = False
         if verify:
             for key in request.POST:
                 if key == "BANKTXNID" or key == "RESPCODE":
@@ -61,8 +68,13 @@ def response(request):
                         data_dict[key] = 0
                 elif key == "TXNAMOUNT":
                     data_dict[key] = float(request.POST[key])
-            PaytmHistory.objects.create(user=settings.USER, **data_dict)
+            
+            # REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
+            PaytmHistory.objects.create(user=User.objects.get(username=user_id), **data_dict)
             return render(request, "response.html", {"paytm": data_dict})
         else:
             return HttpResponse("checksum verify failed")
+    else:
+        return HttpResponse("Method \"GET\" not allowed")
+
     return HttpResponse(status=200)

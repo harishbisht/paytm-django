@@ -23,6 +23,7 @@ class PaytmHistory(models.Model):
 
     class Meta:
         app_label = 'paytm'
+        unique_together = (("ORDERID", "TXNID"),)
 
     def __unicode__(self):
         return self.STATUS
