@@ -16,12 +16,11 @@ virtualenv paytm
 source paytm/bin/activate
 
 (Windows)
-cd
 paytm\Scripts\activate
 ```
 * Now enter into the project folder
 ```javascript
-cd paytm-django/payments/
+cd payments/
 ```
 * Now install the requirements
 ```javascript
@@ -45,7 +44,7 @@ python manage.py makemigrations
 
 *Migrate paytm app for transactions details
 ```
-python manage.py migrate paytm
+python manage.py migrate
 ```
 
 *Create Super user
@@ -55,7 +54,7 @@ python manage.py createsuperuser
 
 * Now in terminal run the server and go to http://localhost:8000/
 ```
-python manange.py runserver
+python manage.py runserver
 ```
 
 *Go to
