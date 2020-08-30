@@ -3,7 +3,7 @@
 # .travis.yml (c) 2020
 # Desc: description
 # Created:  Sun Aug 30 2020 22:38:30 GMT+0530 (India Standard Time)
-# Modified: Sun Aug 30 2020 23:16:29 GMT+0530 (India Standard Time)
+# Modified: Sun Aug 30 2020 23:33:08 GMT+0530 (India Standard Time)
 # 
 
 language: python            # this works for Linux but is an error on macOS or Windows
@@ -44,3 +44,4 @@ script:
   - python3 manage.py makemigrations
   - python3 manage.py migrate
   - python3 manage.py test
+  
