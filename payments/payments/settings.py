@@ -128,8 +128,8 @@ HOST_URL = "http://localhost:8000"
 PAYTM_CALLBACK_URL = "/paytm/response/"
 
 if DEBUG:
-    PAYTM_MERCHANT_KEY = "xxxxxxxxxxxxxxxx"
-    PAYTM_MERCHANT_ID = "xxxxxxxxxxxxxxxxxxxx"
+    PAYTM_MERCHANT_KEY = os.environ.get('PAYTM_MERCHANT_KEY')
+    PAYTM_MERCHANT_ID = os.environ.get('PAYTM_MERCHANT_ID')
     PAYTM_WEBSITE = 'WEBSTAGING'
     HOST_URL = 'http://localhost:8000'
     '''
