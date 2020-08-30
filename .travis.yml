@@ -3,7 +3,6 @@ jobs:
   include:
     - name: "Python 3.8 on Xenial Linux" # this works for Linux but is ignored on macOS or Windows
       python:
-        - "3.5"
         - "3.6"      # current default Python on Travis CI
         - "3.7"
         - "3.8"
