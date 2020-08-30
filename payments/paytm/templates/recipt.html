@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="{% static 'images/jigyasa.png' %}" />
+    {% if title %}
+      <title>JIGYASA - {{ title }}</title>
+    {% else %}
+      <title>JIGYASA</title>
+    {% endif %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      alert("Please save your Transaction ID and Order ID for future refrences.");
+    </script>
+
+    <div class="container" style="margin-top:10%;">
+      <div class="row justify-content-center">
+        <div class="col-11 col-md-8 mt-5 mb-5 border-primary pricing">
+            <p class="text-primary">Jigyasa Payments!!!</p>
+            <p class="text-primary">CHECKOUT DETAILS</p>
+
+
+              {% if status == 'TXN_SUCCESS' %}
+              <p class="text-primary">Congratulation your payment is successful.<span class="fas fa-check-circle"></span></p>
+              {% elif status == 'TXN_FAILURE' %}
+              <p class="text-primary">Transaction Failed, Please try again.<span class="fas fa-times-circle"></span></p>
+              {% elif status == 'PENDING' %}
+              <p class="text-primary">Transaction Pending, We will contact u soon or contact us on "CONTACT US" tab in website.<span class="fas fa-times-circle"></span></p>
+              {% endif %}
+
+            <table border="1">
+
+            <tbody>
+
+
+              {% for key,value in paytmr.items %}
+
+                {% if key == 'id' or key == 'user' or key == 'MID' or key == 'PAYMENTMODE' or key == 'CURRENCY' or key == 'RESPCODE' or key == 'GATEWAYNAME' or key == 'BANKNAME' %}
+
+                {% else %}
+
+
+                  {{key}} - {{ value }}<br>
+
+                  {% endif %}
+              {% endfor %}
+
+
+
+            <!-- {% for key,value in paytmr.items %}
+                <input type="hidden" name="{{key}}" value="{{value}}">
+            {% endfor %} -->
+            </tbody>
+            <!-- <h2>{{ user }}</h2> -->
+            <br>
+            <button class="btn btn-primary px-4 py-2" type="button"><a href="{% url 'payments_home' %}"  style="color:white;">Back to Profile</a></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

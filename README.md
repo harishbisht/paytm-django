@@ -1,10 +1,10 @@
-# Paytm-Python-Django (For python 3)
+﻿# Paytm-Python-Django (For python 3)
 Paytm-Payment Gateway Example On Python-Django
 
 * First clone the project, open your terminal and enter the command
 
 ```javascript
-git clone https://github.com/harishbisht/paytm-django.git
+git clone https://github.com/itsnikhil/paytm-django.git
 ```
 * Now create a virtual environment
 ```javascript
@@ -12,13 +12,17 @@ virtualenv paytm
 ```
 * Now activate the virtual environment
 ```javascript
+(Linux/ MacOS)
 source paytm/bin/activate
+
+(Windows)
+paytm\Scripts\activate
 ```
 * Now enter into the project folder
 ```javascript
-cd paytm-django/payments/
+cd payments/
 ```
-* Now install the requirements 
+* Now install the requirements
 ```javascript
 pip install -r requirements.txt
 ```
@@ -26,13 +30,11 @@ pip install -r requirements.txt
 ```
 PAYTM_MERCHANT_KEY=  "<YOUR-PAYTM-MERCHANT-KEY>"
 PAYTM_MERCHANT_ID = "<YOUR-PAYTM-MERCHANT-ID>"
-PAYTM_CALLBACK_URL = "http://localhost:8000/response/"
 ```
 *Staging Credentials
 ```
-PAYTM_MERCHANT_KEY = "bKMfNxPPf_QdZppa"
-PAYTM_MERCHANT_ID = "DIY12386817555501617"
-PAYTM_WEBSITE = 'WEB_STAGING'
+PAYTM_MERCHANT_KEY = "<YOUR-PAYTM-STAGING-MERCHANT-KEY>"
+PAYTM_MERCHANT_ID = "<YOUR-PAYTM-STAGING-MERCHANT-ID>"
 ```
 
 *Make Migrations
@@ -42,7 +44,7 @@ python manage.py makemigrations
 
 *Migrate paytm app for transactions details
 ```
-python manage.py migrate paytm
+python manage.py migrate
 ```
 
 *Create Super user
@@ -52,7 +54,7 @@ python manage.py createsuperuser
 
 * Now in terminal run the server and go to http://localhost:8000/
 ```
-python manange.py runserver
+python manage.py runserver
 ```
 
 *Go to
@@ -71,5 +73,5 @@ OTP – 489871
 
 ### Stuff used to make this:
 
- * [PAYTM API DOCUMENTATION](http://paywithpaytm.com/developer/paytm_api_doc/) 
- * [SDK DOCUMENTATION](http://paywithpaytm.com/developer/paytm_sdk_doc/) 
+ * [PAYTM API DOCUMENTATION](http://paywithpaytm.com/developer/paytm_api_doc/)
+ * [SDK DOCUMENTATION](http://paywithpaytm.com/developer/paytm_sdk_doc/)

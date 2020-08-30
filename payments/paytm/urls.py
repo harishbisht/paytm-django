@@ -1,9 +1,10 @@
-from django.conf.urls import include, url
-
+from django.urls import re_path
+from paytm.views import home, payment, response
 
 urlpatterns = [
-    # Examples:
-    url(r'^$', 'paytm.views.home', name='home'),
-    url(r'^payment/', 'paytm.views.payment', name='payment'),
-    url(r'^response/', 'paytm.views.response', name='response'),
+
+    re_path(r'^$', home, name='home'),
+    re_path(r'^payment/', payment, name='payment'),
+    # REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
+    re_path(r'^response/(?P<user_id>\w+)/$', response, name='response'),
 ]

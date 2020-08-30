@@ -1,0 +1,36 @@
+language: python            # this works for Linux but is an error on macOS or Windows
+jobs:
+  include:
+    - name: "Python 3.8 on Xenial Linux" # this works for Linux but is ignored on macOS or Windows
+      python:
+        - "3.6"      # current default Python on Travis CI
+        - "3.7"
+        - "3.8"
+    - name: "Python 3.7 on macOS"
+      os: osx
+      osx_image: xcode11.2  # Python 3.7 running on macOS
+      language: shell       # 'language: python' is an error on Travis CI macOS
+    - name: "Python 3.8 on Windows"
+      os: windows           # Python 3.8 running on Windows 10
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.8.0
+        - python -m pip install --upgrade pip
+      env: 
+        - PATH=/c/Python38:/c/Python38/Scripts:$PATH
+        - DJANGO_VERSION=2.1
+        - DJANGO_VERSION=2.2
+        - PAYTM_MERCHANT_KEY=$PAYTM_MERCHANT_KEY
+        - PAYTM_MERCHANT_ID=$PAYTM_MERCHANT_ID 
+install: 
+  - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
+  - cd payments/
+  - pip3 install -r requirements.txt
+
+# 'python' points to Python 2.7 on macOS but points to Python 3.8 on Linux and Windows
+# 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
+script: 
+  - python3 manage.py makemigrations || python manage.py makemigrations
+  - python3 manage.py migrate || python manage.py migrate
+  - python3 manage.py test || python manage.py test
+  

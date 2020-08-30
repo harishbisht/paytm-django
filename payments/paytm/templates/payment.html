@@ -1,0 +1,31 @@
+<html>
+    <head?
+        <title>Paytm Secure Online Payment Gateway</title>
+   </head>
+   <body>
+       <p>{{user}}</p>
+        <table align='center'>
+            <tr>
+            <td><STRONG>Transaction is being processed,</STRONG></td>
+            </tr>
+            <tr>
+            <td><font color='blue'>Please wait ...</font></td>
+            </tr>
+            <tr>
+            <td>(Please do not press 'Refresh' or 'Back' button)</td>
+            </tr>
+        </table>
+        <form method="post" action="https://securegw-stage.paytm.in/theia/processTransaction" name="f1">
+        <table border="1">
+            <tbody>
+            {% for key,value in paytmdict.items %}
+                <input type="hidden" name="{{key}}" value="{{value}}">
+            {% endfor %}
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            document.f1.submit();
+        </script>
+        </form>
+    </body>
+</html>

@@ -25,7 +25,7 @@ SECRET_KEY = '9q$ntg=n=j*w1n9i3hya-5so*8@!nl1#-z#u-o6-46tp$7k6s$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', "localhost"]
 
 
 # Application definition
@@ -37,16 +37,21 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'paytm',
+    # AUTHENTICATION
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -69,6 +74,14 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 WSGI_APPLICATION = 'payments.wsgi.application'
 
@@ -97,25 +110,35 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+if DEBUG:
+    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
+    STATICFILES_DIR = (
+        os.path.join(os.path.dirname(BASE_DIR), "static", "static"),
+    )
 
-PAYTM_MERCHANT_KEY = ""
-PAYTM_MERCHANT_ID = ""
-HOST_URL = "http://localhost:8080"
+PAYTM_MERCHANT_KEY = "xxxxxxxxxxxxxxxx"
+PAYTM_MERCHANT_ID = "xxxxxxxxxxxxxxxxxxxx"
+HOST_URL = "http://localhost:8000"
 PAYTM_CALLBACK_URL = "/paytm/response/"
 
 if DEBUG:
-    PAYTM_MERCHANT_KEY = "xxxx"
-    PAYTM_MERCHANT_ID = "xxxx"
-    PAYTM_WEBSITE = 'WEB_STAGING'
+    PAYTM_MERCHANT_KEY = os.environ.get('PAYTM_MERCHANT_KEY')
+    PAYTM_MERCHANT_ID = os.environ.get('PAYTM_MERCHANT_ID')
+    PAYTM_WEBSITE = 'WEBSTAGING'
     HOST_URL = 'http://localhost:8000'
     '''
     In sandbox enviornment you can use following wallet credentials to login and make payment.
     Mobile Number : 7777777777
     Password : Paytm12345
+    OTP: 489871
     This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
     '''
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
