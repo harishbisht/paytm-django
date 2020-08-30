@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-# 
-# Author: Nikhil Taneja (taneja.nikhil03@gmail.com)
-# .travis.yml (c) 2020
-# Desc: description
-# Created:  Sun Aug 30 2020 22:38:30 GMT+0530 (India Standard Time)
-# Modified: Sun Aug 30 2020 23:44:10 GMT+0530 (India Standard Time)
-# 
-
-=======
->>>>>>> master
 language: python            # this works for Linux but is an error on macOS or Windows
 jobs:
   include:
