@@ -32,6 +32,6 @@ install:
 # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
 script: 
   - python3 manage.py makemigrations || python manage.py makemigrations
-  - python3 manage.py migrate || python3 manage.py migrate
+  - python3 manage.py migrate || python manage.py migrate
   - python3 manage.py test || python manage.py test
   
